@@ -4,7 +4,7 @@ const router = express.Router();
 const bcryptjs = require("bcryptjs");
 const connectToDatabase = require('../models/db');
 const logger = require('../logger');
-const { validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
 const JWT_SECRET = `${process.env.JWT_SECRET}`;
 
