@@ -6,10 +6,10 @@ const pinoLogger = require('./logger')
 const connectToDatabase = require('./models/db')
 const { loadData } = require('./util/import-mongo/index')
 const app = express()
-app.use("*", cors())
-const port = 3060;
+app.use('*', cors())
+const port = 3060
 
-loadData();
+loadData()
 
 // Connect to MongoDB; we just do this one time
 connectToDatabase().then(() => {
@@ -17,8 +17,7 @@ connectToDatabase().then(() => {
 })
   .catch((e) => console.error('Failed to connect to DB', e))
 
-
-app.use(express.json());
+app.use(express.json())
 
 // Route files
 
@@ -32,7 +31,6 @@ const secondChanceItemsRoutes = require('./routes/secondChanceItemsRoutes')
 const searchRoutes = require('./routes/searchRoutes')
 
 const imageRoutes = require('./routes/imageRoutes')
-
 
 const pinoHttp = require('pino-http')
 const logger = require('./logger')
@@ -51,17 +49,16 @@ app.use('/api/secondchance/search', searchRoutes)
 
 app.use('/images', imageRoutes)
 
-
 // Global Error Handler
 app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send('Internal Server Error')
+  console.error(err)
+  res.status(500).send('Internal Server Error')
 });
 
 app.get("/",(req,res)=>{
-    res.send("Inside the server")
+  res.send("Inside the server")
 })
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
+  console.log(`Server running on port ${port}`)
 });
