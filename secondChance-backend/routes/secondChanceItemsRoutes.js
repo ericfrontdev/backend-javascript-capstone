@@ -36,21 +36,20 @@ router.get('/', async (req, res, next) => {
 // Get a single secondChanceItem by ID
 router.get('/:id', async (req, res, next) => {
   try {
-    const db = await connectToDatabase();
-    const collection = db.collection("secondChanceItems")
-    const id = req.params.id;
+    const db = await connectToDatabase()
+    const collection = db.collection('secondChanceItems')
+    const id = req.params.id
     const secondChanceItem = await collection.findOne({ id: id })
 
     if (!secondChanceItem) {
-        return res.status(404).send("secondChanceItem not found")
+      return res.status(404).send('secondChanceItem not found')
     }
 
     res.json(secondChanceItem)
-    } catch (e) {
-        next(e);
-    }
+  } catch (e) {
+    next(e)
+  }
 })
-
 
 // Add a new item
 router.post('/', upload.single('file'), async(req, res,next) => {
