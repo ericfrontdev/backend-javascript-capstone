@@ -56,7 +56,7 @@ router.post('/', upload.single('file'), async (req, res, next) => {
   try {
     const db = await connectToDatabase()
     const collection = db.collection('secondChanceItems')
-    const lastItemQuery = await collection.find().sort({ 'id': -1 }).limit(1)
+    const lastItemQuery = await collection.find().sort({ id: -1 }).limit(1)
     let secondChanceItem = req.body
 
     await lastItemQuery.forEach(item => {
