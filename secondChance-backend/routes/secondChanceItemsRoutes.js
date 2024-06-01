@@ -24,28 +24,28 @@ router.get('/', async (req, res, next) => {
   try {
     const db = await connectToDatabase()
 
-    const collection = db.collection("secondChanceItems")
+    const collection = db.collection('secondChanceItems')
     const secondChanceItems = await collection.find({}).toArray()
-    res.json(secondChanceItems);
+    res.json(secondChanceItems)
   } catch (e) {
-      logger.console.error('Something went wrong ', e)
-      next(e)
+    logger.console.error('Something went wrong ', e)
+    next(e)
   }
 })
 
 // Get a single secondChanceItem by ID
 router.get('/:id', async (req, res, next) => {
-    try {
-      const db = await connectToDatabase();
-      const collection = db.collection("secondChanceItems");
-      const id = req.params.id;
-      const secondChanceItem = await collection.findOne({ id: id });
+  try {
+    const db = await connectToDatabase();
+    const collection = db.collection("secondChanceItems")
+    const id = req.params.id;
+    const secondChanceItem = await collection.findOne({ id: id })
 
-      if (!secondChanceItem) {
-          return res.status(404).send("secondChanceItem not found");
-      }
+    if (!secondChanceItem) {
+        return res.status(404).send("secondChanceItem not found")
+    }
 
-      res.json(secondChanceItem);
+    res.json(secondChanceItem)
     } catch (e) {
         next(e);
     }
