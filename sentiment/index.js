@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const axios = require('axios');
 const logger = require('./logger');
 const expressPino = require('express-pino-logger')({ logger });
 // Task 1: import the natural library
@@ -12,14 +11,11 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(expressPino);
-
 // Define the sentiment analysis route
 // Task 3: create the POST /sentiment analysis
 app.post('/sentiment', async (req, res) => {
-
     // Task 4: extract the sentence parameter
     const { sentence } = req.query;
-
     if (!sentence) {
         logger.error('No sentence provided');
         return res.status(400).json({ error: 'No sentence provided' });
